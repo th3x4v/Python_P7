@@ -4,6 +4,7 @@ from bruteforce import bruteforce
 from optimised import Sorted_method
 from optimised import Knapsack_method
 from optimised import Simple_knapsack_method
+import argparse
 
 
 def load_csv(file):
@@ -57,12 +58,19 @@ def best_combination_to_csv(writer, data):
             )
 
 def main():
-    data1 = load_csv("dataset1_Python+P7")
-    data2 = load_csv("dataset2_Python+P7")
-    result1 = Sorted_method(data1[0])
+    parser = argparse.ArgumentParser()
+    parser.add_argument("filename", help="Name of the file to load")
+    args = parser.parse_args()
+    data = load_csv(args.filename)
+    result1 = Sorted_method(data[0])
+    result2 = Simple_knapsack_method(data[1])
+    result3 = Knapsack_method(data[1])
+    result_name = "result_" + args.filename + ".csv"
+    write_to_csv(result_name, result1, result2, result3)
+"""    result1 = Sorted_method(data1[0])
     result2 = Simple_knapsack_method(data1[1])
     result3 = Knapsack_method(data1[1])
-    write_to_csv("result_data1.csv",result1, result2, result3)
+    write_to_csv("result_data1.csv",result1, result2, result3)"""
 
 
 
